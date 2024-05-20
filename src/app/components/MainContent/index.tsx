@@ -48,7 +48,7 @@ const MainContent: React.FC = () => {
                     <div>
                         <h2>{meal.strMeal}</h2>
                         <img src={meal.strMealThumb} alt={meal.strMeal} />
-                        <p className="text-center p-2 mt-4 mb-4 leading-loose tracking-wide w-[250px] md:w-full">{meal.strInstructions}</p>
+                        <p className="text-center p-2 mt-4 mb-4 leading-loose tracking-wide xs:w-[250px] md:w-full">{meal.strInstructions}</p>
                     </div>
                 )}
             </div>
