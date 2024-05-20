@@ -40,7 +40,7 @@ const MainContent: React.FC = () => {
     return (
         <>
             <div className="flex justify-center align-center p-10 mt-12 text-2xl">
-                <button onClick={handleClick}>Get Random Meal</button>
+                <button onClick={handleClick} className="hover:text-gray-500">Get Random Meal</button>
             </div>
 
             <div>
