@@ -26,6 +26,18 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+.instructions {
+  transition: visibility 0s, opacity 0.5s linear;
+}
+.instructions.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+.instructions.visible {
+  visibility: visible;
+  opacity: 1;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
