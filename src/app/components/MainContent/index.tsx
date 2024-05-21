@@ -37,6 +37,11 @@ const MainContent: React.FC = () => {
         await fetchData();
     };
 
+    const handleInstructions = () => {  
+        let elem = document.querySelector(".instructions"); 
+        elem?.classList.toggle("hidden"); 
+    }
+
     return (
         <>
             <div className="flex justify-center align-center p-10 mt-12 text-2xl">
@@ -45,10 +50,11 @@ const MainContent: React.FC = () => {
 
             <div>
                 {meal && (
-                    <div>
-                        <h2>{meal.strMeal}</h2>
-                        <img src={meal.strMealThumb} alt={meal.strMeal} />
-                        <p className="text-center p-2 mt-4 mb-4 leading-loose tracking-wide xs:w-[250px] md:w-full">{meal.strInstructions}</p>
+                    <div className="flex flex-col justify-center items-center">
+                        <h2 className="text-center text-xl p-3">{meal.strMeal}</h2>
+                        <img src={meal.strMealThumb} alt={meal.strMeal} className="rounded-xl w-full max-w-xs md:max-w-md h-auto"/>
+                        <button className="p-3" onClick={handleInstructions}> Show Instructions </button>
+                        <p className="instructions text-center p-2 mt-4 mb-4 leading-loose tracking-wide xs:w-[250px] md:w-full hidden">{meal.strInstructions}</p>
                     </div>
                 )}
             </div>
