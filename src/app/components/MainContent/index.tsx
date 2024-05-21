@@ -6,47 +6,10 @@ interface Meal {
     strMeal: string;
     strMealThumb: string;
     strInstructions: string;
-    strYoutube: string; 
-    strIngredient1: string; 
-    strIngredient2: string; 
-    strIngredient3: string; 
-    strIngredient4: string; 
-    strIngredient5: string; 
-    strIngredient6: string; 
-    strIngredient7: string; 
-    strIngredient8: string; 
-    strIngredient9: string; 
-    strIngredient11: string; 
-    strIngredient12: string; 
-    strIngredient13: string; 
-    strIngredient14: string; 
-    strIngredient15: string; 
-    strIngredient16: string; 
-    strIngredient17: string; 
-    strIngredient18: string; 
-    strIngredient19: string; 
-    strIngredient20: string; 
-    strMeasure1: string; 
-    strMeasure2: string; 
-    strMeasure3: string; 
-    strMeasure4: string; 
-    strMeasure5: string; 
-    strMeasure6: string; 
-    strMeasure7: string; 
-    strMeasure8: string; 
-    strMeasure9: string; 
-    strMeasure11: string; 
-    strMeasure12: string; 
-    strMeasure13: string; 
-    strMeasure14: string; 
-    strMeasure15: string; 
-    strMeasure16: string; 
-    strMeasure17: string; 
-    strMeasure18: string; 
-    strMeasure19: string; 
-    strMeasure20: string; 
+    strYoutube: string;
+    [key: `strIngredient${number}`]: string | undefined;
+    [key: `strMeasure${number}`]: string | undefined;
 }
-
 interface MealResponse {
     meals: Meal[];
 }
@@ -81,6 +44,33 @@ const MainContent: React.FC = () => {
         elem?.classList.toggle("visible");
     }
 
+    const renderIngredients = () => {
+        if (!meal) return null;
+    
+        const ingredients = [];
+    
+        for (let i = 1; i <= 20; i++) {
+            const ingredient = meal[`strIngredient${i}`];
+            const measure = meal[`strMeasure${i}`];
+    
+            if (ingredient || measure) {
+                ingredients.push(
+                    <li key={i} className="p-2">
+                        {measure && `${measure} `}
+                        {ingredient}
+                    </li>
+                );
+            }
+            // Stop the loop if the ingredient and measure are both empty
+            if (!ingredient && !measure) {
+                break;
+            }
+        }
+    
+        return ingredients;
+    };
+    
+
     return (
         <>
             <div className="flex justify-center items-center p-10 mt-12 text-2xl">
@@ -92,7 +82,12 @@ const MainContent: React.FC = () => {
                     <div className="flex flex-col justify-center items-center">
                         <h2 className="text-center text-xl p-3">{meal.strMeal}</h2>
                         <img src={meal.strMealThumb} alt={meal.strMeal} className="rounded-xl w-full max-w-xs md:max-w-md h-auto"/>
-                        <button className="p-3" onClick={handleInstructions}> Show Instructions </button>
+                        <div className="ingredients text-center"> 
+                        <h4 className="mt-4 mb-3 text-xl"> Ingredients </h4>
+                        <ul>
+                                {renderIngredients()}
+                            </ul></div>
+                        <button className="p-4" onClick={handleInstructions}> Show Instructions </button>
                         <p className="instructions text-center p-2 mt-4 mb-4 leading-loose tracking-wide xs:w-[250px] md:w-full hidden">
                             {meal.strInstructions}
                         </p>
