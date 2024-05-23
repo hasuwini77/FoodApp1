@@ -1,0 +1,21 @@
+
+.navbar { 
+
+}
+
+.logo { 
+
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+    margin: 0;
+    }
+  
+   .logo {
+
+    }
+  
+  }

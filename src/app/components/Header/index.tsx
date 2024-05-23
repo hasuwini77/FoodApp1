@@ -1,10 +1,39 @@
-const Header = () => { 
+'use client'
+import {Navbar, NavbarBrand, NavbarContent, Link, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar} from "@nextui-org/react";
+import AppLogo from "../AppLogo";
+import styles from "./Header.module.css"
 
-    return ( 
-        <header > 
-            <h1 className="text-3xl w-full text-center m-0"> Welcome to Da App</h1>
-        </header>
-    )
+export default function Header() {
+  return (
+    <Navbar className={styles.navbar}>
+      <NavbarBrand className={styles.logo}>
+        <Link href="#"> 
+        < AppLogo/>  
+        </Link>
+      </NavbarBrand>
+
+      <NavbarContent as="div" justify="end">
+        <Dropdown placement="bottom-end">
+          <DropdownTrigger>
+            <Avatar
+              isBordered
+              as="button"
+              className="transition-transform"
+              color="warning"
+              name="Jason Hughes"
+              size="sm"
+              src="https://img.icons8.com/doodle/96/plant-under-sun--v1.png"  alt="plant-under-sun--v1"
+            />
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Profile Actions" variant="flat">
+            <DropdownItem key="profile" className="h-10 gap-2">
+              <p className="font-semibold">Vegetarian</p>
+            </DropdownItem>
+            <DropdownItem key="profile" className="h-10 gap-2"> <p className="font-semibold"> Vegan</p></DropdownItem>
+            <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      </NavbarContent>
+    </Navbar>
+  );
 }
-
-export default Header; 
