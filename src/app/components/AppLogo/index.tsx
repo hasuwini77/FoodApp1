@@ -1,8 +1,18 @@
 import Image from "next/image";
+import styles from "./AppLogo.module.css";
+
 const AppLogo = () => {
   return (
-    <div>
-      <Image src="/foodielogo.png" alt="app-logo" width={300} height={300} priority />
+    <div className={styles.logoContainer}>
+      <Image
+        src="/foodielogo.png"
+        alt="app-logo"
+        layout="intrinsic"
+        width={300}
+        height={300}
+        className={styles.logoImage}
+        priority
+      />
     </div>
   );
 };

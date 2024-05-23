@@ -1,0 +1,20 @@
+.logoContainer {
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .logoImage {
+    width: 100%;
+    height: auto;
+  }
+  
+  
+  @media (max-width: 768px) {
+    .logoContainer {
+   width: 170px;
+   margin-top: 10px;
+    }
+  }
+  

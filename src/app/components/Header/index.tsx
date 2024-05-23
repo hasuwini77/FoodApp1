@@ -1,18 +1,17 @@
 'use client'
-import {Navbar, NavbarBrand, NavbarContent, Link, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar} from "@nextui-org/react";
+import { Navbar, Link, Dropdown, Avatar, DropdownTrigger, DropdownMenu, DropdownItem } from "@nextui-org/react";
 import AppLogo from "../AppLogo";
-import styles from "./Header.module.css"
+import styles from "./Header.module.css";
 
 export default function Header() {
   return (
     <Navbar className={styles.navbar}>
-      <NavbarBrand className={styles.logo}>
-        <Link href="#"> 
-        < AppLogo/>  
+      <div className={styles.navbarBrand}>
+        <Link href="#">
+          <AppLogo />
         </Link>
-      </NavbarBrand>
-
-      <NavbarContent as="div" justify="end">
+      </div>
+      <div className={styles.navbarContent}>
         <Dropdown placement="bottom-end">
           <DropdownTrigger>
             <Avatar
@@ -22,18 +21,21 @@ export default function Header() {
               color="warning"
               name="Jason Hughes"
               size="sm"
-              src="https://img.icons8.com/doodle/96/plant-under-sun--v1.png"  alt="plant-under-sun--v1"
+              src="https://img.icons8.com/doodle/96/plant-under-sun--v1.png"
+              alt="plant-under-sun--v1"
             />
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat">
             <DropdownItem key="profile" className="h-10 gap-2">
               <p className="font-semibold">Vegetarian</p>
             </DropdownItem>
-            <DropdownItem key="profile" className="h-10 gap-2"> <p className="font-semibold"> Vegan</p></DropdownItem>
+            <DropdownItem key="profile" className="h-10 gap-2">
+              <p className="font-semibold">Vegan</p>
+            </DropdownItem>
             <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
           </DropdownMenu>
         </Dropdown>
-      </NavbarContent>
+      </div>
     </Navbar>
   );
 }

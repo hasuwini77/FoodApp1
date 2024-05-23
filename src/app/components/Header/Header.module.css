@@ -1,11 +1,22 @@
-
-.navbar { 
-
-}
-
-.logo { 
-
-}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    margin-top: 49px;
+    padding: 0;
+  }
+  
+  .navbarBrand {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbarContent {
+    display: flex;
+    align-items: center;
+  }
+  
 
 @media (max-width: 768px) {
     .navbar {
