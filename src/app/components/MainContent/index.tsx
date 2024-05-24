@@ -28,8 +28,6 @@ const MainContent: React.FC = () => {
     const handleClick = async () => {
         setMeal(null); // Reset meal to ensure fetch happens on button click
         setLoading(true);
-        let getMealElem = document.querySelector(".getMeal"); 
-        getMealElem?.classList.toggle("hidden")
 
         setTimeout(async () => {
             const fetchData = async () => {
@@ -41,12 +39,11 @@ const MainContent: React.FC = () => {
                     console.error('Error fetching data:', error);
                 } finally {
                     setLoading(false);
-                    getMealElem?.classList.toggle("hidden")
                 }
             };
 
             await fetchData();
-        }, 2000); 
+        }, 1500);
     };
 
     const handleInstructions = () => {  
@@ -84,25 +81,24 @@ const MainContent: React.FC = () => {
     return (
         <>
             <div className="flex justify-center items-center p-10 mt-12 text-2xl">
-                <button onClick={handleClick} className="getMeal hover:text-gray-500">Get Meal</button>
+                {!loading ? (
+                    <button onClick={handleClick} className="getMeal hover:text-gray-500">Get Meal</button>
+                ) : (
+                    <div className="loader">Loading...</div>
+                )}
             </div>
 
             <div>
-                {loading && (
-                    <div className="flex justify-center items-center p-10 mt-12 text-2xl">
-                        <div className="loader">Loading...</div>
-                    </div>
-                )}
-
-                {meal && !loading && (
+                {meal && (
                     <div className="flex flex-col justify-center items-center">
                         <h2 className="text-center text-xl p-3">{meal.strMeal}</h2>
                         <img src={meal.strMealThumb} alt={meal.strMeal} className="rounded-xl w-full max-w-xs md:max-w-md h-auto"/>
                         <div className="ingredients text-center"> 
-                        <h4 className="mt-4 mb-3 text-xl"> Ingredients </h4>
-                        <ul>
+                            <h4 className="mt-4 mb-3 text-xl">Ingredients</h4>
+                            <ul>
                                 {renderIngredients()}
-                            </ul></div>
+                            </ul>
+                        </div>
                         <button className="p-4" onClick={handleInstructions}> Show Instructions </button>
                         <p className="instructions text-center p-2 mt-4 mb-4 leading-loose tracking-wide xs:w-[250px] md:w-full hidden">
                             {meal.strInstructions}
