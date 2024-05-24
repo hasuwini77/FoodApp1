@@ -10,12 +10,14 @@ interface Meal {
     [key: `strIngredient${number}`]: string | undefined;
     [key: `strMeasure${number}`]: string | undefined;
 }
+
 interface MealResponse {
     meals: Meal[];
 }
 
 const MainContent: React.FC = () => {
     const [meal, setMeal] = useState<Meal | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
         if (meal) {
@@ -25,17 +27,26 @@ const MainContent: React.FC = () => {
 
     const handleClick = async () => {
         setMeal(null); // Reset meal to ensure fetch happens on button click
-        const fetchData = async () => {
-            try {
-                const response = await fetch("https://www.themealdb.com/api/json/v1/1/random.php");
-                const data: MealResponse = await response.json();
-                setMeal(data.meals[0]);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
+        setLoading(true);
+        let getMealElem = document.querySelector(".getMeal"); 
+        getMealElem?.classList.toggle("hidden")
 
-        await fetchData();
+        setTimeout(async () => {
+            const fetchData = async () => {
+                try {
+                    const response = await fetch("https://www.themealdb.com/api/json/v1/1/random.php");
+                    const data: MealResponse = await response.json();
+                    setMeal(data.meals[0]);
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                } finally {
+                    setLoading(false);
+                    getMealElem?.classList.toggle("hidden")
+                }
+            };
+
+            await fetchData();
+        }, 2000); 
     };
 
     const handleInstructions = () => {  
@@ -69,16 +80,21 @@ const MainContent: React.FC = () => {
     
         return ingredients;
     };
-    
 
     return (
         <>
             <div className="flex justify-center items-center p-10 mt-12 text-2xl">
-                <button onClick={handleClick} className="hover:text-gray-500">Get Random Meal</button>
+                <button onClick={handleClick} className="getMeal hover:text-gray-500">Get Meal</button>
             </div>
 
             <div>
-                {meal && (
+                {loading && (
+                    <div className="flex justify-center items-center p-10 mt-12 text-2xl">
+                        <div className="loader">Loading...</div>
+                    </div>
+                )}
+
+                {meal && !loading && (
                     <div className="flex flex-col justify-center items-center">
                         <h2 className="text-center text-xl p-3">{meal.strMeal}</h2>
                         <img src={meal.strMealThumb} alt={meal.strMeal} className="rounded-xl w-full max-w-xs md:max-w-md h-auto"/>
