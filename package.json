@@ -12,9 +12,11 @@
     "@nextui-org/navbar": "^2.0.30",
     "@nextui-org/react": "^2.3.6",
     "framer-motion": "^11.2.6",
+    "ldrs": "^1.0.1",
     "next": "14.2.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-loader-spinner": "^6.1.6"
   },
   "devDependencies": {
     "@types/node": "^20",

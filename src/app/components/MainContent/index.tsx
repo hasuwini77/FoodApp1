@@ -1,5 +1,6 @@
 'use client'
 import React, { useEffect, useState } from "react";
+import { BallTriangle } from "react-loader-spinner";
 
 interface Meal {
     idMeal: string;
@@ -84,7 +85,16 @@ const MainContent: React.FC = () => {
                 {!loading ? (
                     <button onClick={handleClick} className="getMeal hover:text-gray-500">Get Meal</button>
                 ) : (
-                    <div className="loader">Loading...</div>
+                    <div className="loader"><BallTriangle
+                    height={100}
+                    width={100}
+                    radius={5}
+                    color="#4fa94d"
+                    ariaLabel="ball-triangle-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                    /></div>
                 )}
             </div>
 
